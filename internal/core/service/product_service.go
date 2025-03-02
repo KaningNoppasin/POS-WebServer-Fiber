@@ -13,7 +13,7 @@ type ProductService struct {
 	repo port.ProductRepository
 }
 
-func NewProductService(repo port.ProductRepository) port.ProductSevice {
+func NewProductService(repo port.ProductRepository) port.ProductService {
 	return &ProductService{repo: repo}
 }
 
@@ -50,7 +50,7 @@ func (s *ProductService) GetProductByBarcode(barcode string) (*entity.Product, e
 func (s *ProductService) CreateProduct(product *entity.Product) error {
 	err := s.repo.Create(product)
 	if err != nil {
-		// if process fial need to delete image
+		// if process fail need to delete image
 		util.DeleteImage(product.ImagePath)
 
 		return ErrFailedToCreateProduct
@@ -61,7 +61,7 @@ func (s *ProductService) CreateProduct(product *entity.Product) error {
 func (s *ProductService) UpdateProduct(product *entity.Product) error {
 	existingProduct, err := s.repo.GetByID(product.ID)
 	if err != nil {
-		// if process fial need to delete image
+		// if process fail need to delete image
 		util.DeleteImage(product.ImagePath)
 
 		if errors.Is(err, gorm.ErrRecordNotFound) {
@@ -72,7 +72,7 @@ func (s *ProductService) UpdateProduct(product *entity.Product) error {
 
 	err = s.repo.Update(product)
 	if err != nil {
-		// if process fial need to delete image
+		// if process fail need to delete image
 		util.DeleteImage(product.ImagePath)
 
 		return ErrFailedToCreateProduct

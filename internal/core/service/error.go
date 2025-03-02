@@ -9,3 +9,11 @@ var (
 	ErrFailedToUpdateProduct   = errors.New("failed to update product")
 	ErrFailedToDeleteProduct   = errors.New("failed to delete product")
 )
+
+var (
+	ErrStockNotFound         = errors.New("stock not found")
+	ErrFailedToRetrieveStock = errors.New("failed to retrieve stock")
+	ErrFailedToCreateStock   = errors.New("failed to create stock")
+	ErrFailedToUpdateStock   = errors.New("failed to update stock")
+	ErrFailedToDeleteStock   = errors.New("failed to delete stock")
+)

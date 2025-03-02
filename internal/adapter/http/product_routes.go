@@ -5,7 +5,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func SetUpProductRoutes(api fiber.Router, productService port.ProductSevice){
+func SetUpProductRoutes(api fiber.Router, productService port.ProductService) {
 	productHandler := NewProductHandler(productService)
 	productRoutes := api.Group("/products")
 	productRoutes.Get("/", productHandler.GetAllProduct)

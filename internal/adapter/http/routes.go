@@ -5,8 +5,13 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func SetUpRoutes(app *fiber.App, productService port.ProductSevice){
+func SetUpRoutes(
+	app *fiber.App,
+	productService port.ProductService,
+	stockService port.StockService,
+) {
 	api := app.Group("/api")
 
 	SetUpProductRoutes(api, productService)
+	SetUpStockRoutes(api, stockService)
 }

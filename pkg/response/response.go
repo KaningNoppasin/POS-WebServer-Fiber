@@ -5,11 +5,12 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-type EnitityType interface {
-	*entity.Product | []entity.Product
+type EntityType interface {
+	*entity.Product | []entity.Product |
+	*entity.Stock | []entity.Stock
 }
 
-func SendSuccessResponse[T EnitityType](c *fiber.Ctx, data T) error {
+func SendSuccessResponse[T EntityType](c *fiber.Ctx, data T) error {
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"status": "success",
 		"data":   data,
