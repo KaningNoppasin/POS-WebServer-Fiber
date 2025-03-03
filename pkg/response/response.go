@@ -7,7 +7,8 @@ import (
 
 type EntityType interface {
 	*entity.Product | []entity.Product |
-	*entity.Stock | []entity.Stock
+	*entity.Stock | []entity.Stock |
+	*entity.Customer | []entity.Customer
 }
 
 func SendSuccessResponse[T EntityType](c *fiber.Ctx, data T) error {

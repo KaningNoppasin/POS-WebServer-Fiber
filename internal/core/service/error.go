@@ -17,3 +17,11 @@ var (
 	ErrFailedToUpdateStock   = errors.New("failed to update stock")
 	ErrFailedToDeleteStock   = errors.New("failed to delete stock")
 )
+
+var (
+	ErrCustomerNotFound         = errors.New("customer not found")
+	ErrFailedToRetrieveCustomer = errors.New("failed to retrieve customer")
+	ErrFailedToCreateCustomer   = errors.New("failed to create customer")
+	ErrFailedToUpdateCustomer   = errors.New("failed to update customer")
+	ErrFailedToDeleteCustomer   = errors.New("failed to delete customer")
+)

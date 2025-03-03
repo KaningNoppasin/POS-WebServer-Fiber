@@ -44,10 +44,14 @@ func main() {
 	stockRepo := db.NewStockRepository(dbConn)
 	stockService := service.NewStockService(stockRepo)
 
+	customerRepo := db.NewCustomerRepository(dbConn)
+	customerService := service.NewCustomerService(customerRepo)
+
 	http.SetUpRoutes(
 		app,
 		productService,
 		stockService,
+		customerService,
 	)
 
 	app.Listen(":8080")
