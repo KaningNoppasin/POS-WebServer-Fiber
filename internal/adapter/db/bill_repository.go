@@ -27,25 +27,8 @@ func (r *BillRepository) GetByID(id uint) (*entity.Bill, error) {
 	return &bill, err
 }
 
-func (r *BillRepository) GetByBarcode(barcode string) (*entity.Bill, error) {
-	var bill entity.Bill
-	err := r.db.Preload("Bill_Details").Where("bill_barcode = ?", barcode).First(&bill).Error
-	return &bill, err
-}
-
 func (r *BillRepository) Create(bill *entity.Bill) error {
 	return r.db.Create(bill).Error
-	// err := r.db.Create(bill).Error
-	// if err != nil {
-	// 	return err
-	// }
-
-	// Create Stock that Quantity initial 0
-	// err = r.db.Create(&entity.Stock{
-	// 	BillID: bill.ID,
-	// 	Quantity:  0,
-	// }).Error
-	// return err
 }
 
 func (r *BillRepository) Update(bill *entity.Bill) error {

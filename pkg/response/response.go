@@ -9,7 +9,8 @@ type EntityType interface {
 	*entity.Product | []entity.Product |
 	*entity.Stock | []entity.Stock |
 	*entity.Customer | []entity.Customer |
-	*entity.Bill | []entity.Bill
+	*entity.Bill | []entity.Bill |
+	*entity.Bill_Details | []entity.Bill_Details
 }
 
 func SendSuccessResponse[T EntityType](c *fiber.Ctx, data T) error {

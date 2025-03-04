@@ -33,3 +33,11 @@ var (
 	ErrFailedToUpdateBill   = errors.New("failed to update bill")
 	ErrFailedToDeleteBill   = errors.New("failed to delete bill")
 )
+
+var (
+	ErrBill_DetailsNotFound         = errors.New("bill_details not found")
+	ErrFailedToRetrieveBill_Details = errors.New("failed to retrieve bill_details")
+	ErrFailedToCreateBill_Details   = errors.New("failed to create bill_details")
+	ErrFailedToUpdateBill_Details   = errors.New("failed to update bill_details")
+	ErrFailedToDeleteBill_Details   = errors.New("failed to delete bill")
+)

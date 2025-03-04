@@ -11,6 +11,7 @@ func SetUpRoutes(
 	stockService port.StockService,
 	customerService port.CustomerService,
 	billService port.BillService,
+	bill_DetailsService port.Bill_DetailsService,
 ) {
 	api := app.Group("/api")
 
@@ -18,4 +19,5 @@ func SetUpRoutes(
 	SetUpStockRoutes(api, stockService)
 	SetUpCustomerRoutes(api, customerService)
 	SetUpBillRoutes(api, billService)
+	SetUpBill_DetailsRoutes(api, bill_DetailsService)
 }

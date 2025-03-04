@@ -50,12 +50,16 @@ func main() {
 	billRepo := db.NewBillRepository(dbConn)
 	billService := service.NewBillService(billRepo)
 
+	bill_detailsRepo := db.NewBill_DetailsRepository(dbConn)
+	bill_detailsService := service.NewBill_DetailsService(bill_detailsRepo)
+
 	http.SetUpRoutes(
 		app,
 		productService,
 		stockService,
 		customerService,
 		billService,
+		bill_detailsService,
 	)
 
 	app.Listen(":8080")
