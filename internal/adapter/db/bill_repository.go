@@ -16,14 +16,13 @@ func NewBillRepository(db *gorm.DB) port.BillRepository {
 
 func (r *BillRepository) GetAll() ([]entity.Bill, error) {
 	var bills []entity.Bill
-	// TODO: Change Query to r.db.Preload("Bill_Details.Product").Find(&bills).Error
-	err := r.db.Preload("Bill_Details").Find(&bills).Error
+	err := r.db.Preload("Bill_Details.Product.Stock").Find(&bills).Error
 	return bills, err
 }
 
 func (r *BillRepository) GetByID(id uint) (*entity.Bill, error) {
 	var bill entity.Bill
-	err := r.db.Preload("Bill_Details").First(&bill, id).Error
+	err := r.db.Preload("Bill_Details.Product.Stock").First(&bill, id).Error
 	return &bill, err
 }
 
@@ -37,7 +36,7 @@ func (r *BillRepository) Update(bill *entity.Bill) error {
 
 func (r *BillRepository) Delete(id uint) error {
 	var bill entity.Bill
-	err := r.db.Preload("Bill_Details").First(&bill, id).Error
+	err := r.db.Preload("Bill_Details.Product.Stock").First(&bill, id).Error
 	if err != nil {
 		return err
 	}
