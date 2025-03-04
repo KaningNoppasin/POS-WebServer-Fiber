@@ -15,58 +15,71 @@ Before starting the project, ensure that you have the following installed:
 
 ## Project Structure
 ```
-.
-├── README.md
-├── cmd
-│   └── main.go
-├── go.mod
-├── go.sum
-├── internal
-│   ├── adapter
-│   │   ├── db
-│   │   │   ├── bill_details_repository.go
-│   │   │   ├── bill_repository.go
-│   │   │   ├── product_repository.go
-│   │   │   └── stock_repository.go
-│   │   └── http
-│   │       ├── bill_details_handler.go
-│   │       ├── bill_handler.go
-│   │       ├── product_handler.go
-│   │       ├── product_routes.go
-│   │       ├── routes.go
-│   │       └── stock_handler.go
-│   └── core
-│       ├── entity
-│       │   ├── bill.go
-│       │   ├── bill_details.go
-│       │   ├── product.go
-│       │   └── stock.go
-│       ├── port
-│       │   ├── bill_details_repository.go
-│       │   ├── bill_details_service.go
-│       │   ├── bill_repository.go
-│       │   ├── bill_service.go
-│       │   ├── product_repository.go
-│       │   ├── product_service.go
-│       │   ├── stock_repository.go
-│       │   └── stock_service.go
-│       └── service
-│           ├── bill_details_service.go
-│           ├── bill_service.go
-│           ├── error.go
-│           ├── product_service.go
-│           └── stock_service.go
-├── pkg
-│   ├── config
-│   │   └── config.go
-│   ├── database
-│   │   └── postgres.go
-│   ├── response
-│   │   └── response.go
-│   └── util
-│       └── file_upload.go
-└── uploads
-    └── default_image.jpeg
+📁 Web-Server-Fiber
+    ├── 📁 cmd                    # Entry point of the application (main.go)
+    │   └── main.go
+    ├── 📁 internal               # Core business logic and adapters
+    │   ├── 📁 adapter            # Adapters (implement interfaces for DB and HTTP)
+    │   │   ├── 📁 db             # Database repositories (data access layer)
+    │   │   │   ├── bill_details_repository.go
+    │   │   │   ├── bill_repository.go
+    │   │   │   ├── customer_repository.go
+    │   │   │   ├── product_repository.go
+    │   │   │   ├── stock_repository.go
+    │   │   ├── 📁 http           # HTTP handlers and routes
+    │   │       ├── bill_details_handler.go
+    │   │       ├── bill_handler.go
+    │   │       ├── bill_routes.go
+    │   │       ├── customer_handler.go
+    │   │       ├── customer_routes.go
+    │   │       ├── product_handler.go
+    │   │       ├── product_routes.go
+    │   │       ├── routes.go
+    │   │       ├── stock_handler.go
+    │   │       ├── stock_routes.go
+    │   ├── 📁 core               # Business logic (Entities, Ports, Services)
+    │   │   ├── 📁 entity         # Domain entities (core business models)
+    │   │   │   ├── bill_details.go
+    │   │   │   ├── bill.go
+    │   │   │   ├── customer.go
+    │   │   │   ├── product.go
+    │   │   │   ├── stock.go
+    │   │   ├── 📁 port           # Ports (interfaces for repositories & services)
+    │   │   │   ├── bill_details_repository.go
+    │   │   │   ├── bill_details_service.go
+    │   │   │   ├── bill_repository.go
+    │   │   │   ├── bill_service.go
+    │   │   │   ├── customer_repository.go
+    │   │   │   ├── customer_service.go
+    │   │   │   ├── product_repository.go
+    │   │   │   ├── product_service.go
+    │   │   │   ├── stock_repository.go
+    │   │   │   ├── stock_service.go
+    │   │   ├── 📁 service        # Service layer (business logic implementations)
+    │   │       ├── bill_details_service.go
+    │   │       ├── bill_service.go
+    │   │       ├── customer_service.go
+    │   │       ├── error.go
+    │   │       ├── product_service.go
+    │   │       ├── stock_service.go
+    ├── 📁 pkg                    # Shared utilities and configurations
+    │   ├── 📁 config             # App configuration
+    │   │   ├── config.go
+    │   ├── 📁 database           # Database connection setup
+    │   │   ├── postgres.go
+    │   ├── 📁 response           # Standardized API response helpers
+    │   │   ├── response.go
+    │   ├── 📁 util               # Utility functions (e.g., file uploads)
+    │       ├── file_upload.go
+    ├── 📁 seeds                  # Database seeding scripts
+    │   ├── seed_data.go
+    ├── 📁 uploads                # File uploads storage (e.g., images)
+    │   ├── default_image.jpeg
+    ├── .env                      # Environment variables
+    ├── .gitignore                # Git ignore file
+    ├── go.mod                     # Go module dependencies
+    ├── go.sum                     # Go dependencies checksum
+    ├── README.md                  # Project documentation
 ```
 
 ## Architecture

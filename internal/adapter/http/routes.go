@@ -10,10 +10,12 @@ func SetUpRoutes(
 	productService port.ProductService,
 	stockService port.StockService,
 	customerService port.CustomerService,
+	billService port.BillService,
 ) {
 	api := app.Group("/api")
 
 	SetUpProductRoutes(api, productService)
 	SetUpStockRoutes(api, stockService)
 	SetUpCustomerRoutes(api, customerService)
+	SetUpBillRoutes(api, billService)
 }

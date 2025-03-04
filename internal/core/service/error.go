@@ -25,3 +25,11 @@ var (
 	ErrFailedToUpdateCustomer   = errors.New("failed to update customer")
 	ErrFailedToDeleteCustomer   = errors.New("failed to delete customer")
 )
+
+var (
+	ErrBillNotFound         = errors.New("bill not found")
+	ErrFailedToRetrieveBill = errors.New("failed to retrieve bill")
+	ErrFailedToCreateBill   = errors.New("failed to create bill")
+	ErrFailedToUpdateBill   = errors.New("failed to update bill")
+	ErrFailedToDeleteBill   = errors.New("failed to delete bill")
+)

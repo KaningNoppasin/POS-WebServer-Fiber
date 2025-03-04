@@ -8,6 +8,6 @@ type Bill_Details struct {
 	ProductID uint    `gorm:"index"`
 	Quantity  uint    `json:"quantity"`
 	Total     uint    `json:"total"`
-	Bill      Bill    `gorm:"foreignKey:BillID;references:ID;constraint:OnDelete:CASCADE;"`
-	Product   Product `gorm:"foreignKey:ProductID;references:ID;constraint:OnDelete:CASCADE;"`
+	// Product   Product `gorm:"foreignKey:ProductID;constraint:OnDelete:CASCADE"`
+	// Bill      Bill    `gorm:"foreignKey:BillID;references:ID;constraint:OnDelete:CASCADE;"`
 }
