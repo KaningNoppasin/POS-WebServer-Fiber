@@ -9,6 +9,8 @@ import (
 	"github.com/KaningNoppasin/Web-Server-Fiber/internal/core/service"
 	"github.com/KaningNoppasin/Web-Server-Fiber/pkg/database"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func main() {
@@ -37,6 +39,12 @@ func main() {
 		log.Fatalf("Error during migration: %v", err)
 	}
 	// seeds.Seed(dbConn)
+
+	app.Use(cors.New())
+	app.Use(logger.New(logger.Config{
+		// For more options, see the Config section
+		Format: "${pid} ${locals:requestid} ${status} - ${method} ${path}​\n",
+	}))
 
 	productRepo := db.NewProductRepository(dbConn)
 	productService := service.NewProductService(productRepo)
