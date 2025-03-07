@@ -136,5 +136,16 @@ The system provides RESTful API endpoints for managing products, bills, stocks, 
 ## Database
 The application uses PostgreSQL for data storage. The connection is managed in `pkg/database/postgres.go`.
 
+🔧 How to Build & Run
+1️⃣ Build the Image
+
+docker build -t web-server-fiber .
+
+2️⃣ Run the Container
+docker run --name web-server-fiber -p 8080:8080 web-server-fiber
+
+docker-compose up -d
+docker logs web-server-fiber
+
 ## License
 MIT License

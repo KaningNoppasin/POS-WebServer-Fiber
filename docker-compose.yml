@@ -1,0 +1,51 @@
+# version: '3.8'
+
+services:
+  # web-server:
+  #   container_name: web-server-fiber
+  #   image: web-server-fiber
+  #   ports:
+  #     - "8080:8080"
+  #   env_file:
+  #     - .env
+  #   # depends_on:
+  #   #   - postgres
+  #   networks:
+  #     - web-network
+  #   restart: unless-stopped
+
+  postgres:
+    image: postgres:13-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_DB: pos_system
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password1234
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    networks:
+      - web-network
+
+  # pgadmin:
+  #   container_name: pgadmin
+  #   image: dpage/pgadmin4
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: admin@example.com
+  #     PGADMIN_DEFAULT_PASSWORD: admin
+  #   ports:
+  #     - "5050:80"
+  #   depends_on:
+  #     - postgres
+  #   networks:
+  #     - web-network
+
+networks:
+  web-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
