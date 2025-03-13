@@ -1,18 +1,18 @@
 version: '3.8'
 
 services:
-    web-server:
-        container_name: web-server-fiber
-        image: web-server-fiber
-        ports:
-            - '8080:8080'
-        env_file:
-            - .env
-        depends_on:
-            - postgres
-        networks:
-            - web-network
-        restart: unless-stopped
+    # web-server:
+    #     container_name: web-server-fiber
+    #     image: web-server-fiber
+    #     ports:
+    #         - '8080:8080'
+    #     env_file:
+    #         - .env
+    #     depends_on:
+    #         - postgres
+    #     networks:
+    #         - web-network
+    #     restart: unless-stopped
     postgres:
         image: postgres:17
         container_name: postgres-pos-system
