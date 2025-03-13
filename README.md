@@ -136,24 +136,84 @@ The system provides RESTful API endpoints for managing products, bills, stocks, 
 ## Database
 The application uses PostgreSQL for data storage. The connection is managed in `pkg/database/postgres.go`.
 
-🔧 How to Build & Run
-1️⃣ Build the Image
+## 🌍 Environment Variables
 
+Before starting the project, ensure that the required environment variable for the database connection is properly set up.
+
+### Option 1: Using the Command Line
+
+Run the following command to append the `DATABASE_URL` environment variable to your `.env` file:
+
+```bash
+echo "DATABASE_URL=postgres://myuser:mypassword@postgres-pos-system:5432/database-pos-system" >> .env
+```
+
+This will store the connection string in a `.env` file in your project’s root directory.
+
+### Option 2: Manually Editing the `.env` File
+
+Alternatively, you can manually add the `DATABASE_URL` to your `.env` file:
+
+```env
+DATABASE_URL=postgres://myuser:mypassword@postgres-pos-system:5432/database-pos-system
+```
+
+## 🔧 How to Build & Run
+
+### 1️⃣ Build the Image
+
+To build the Docker image for the web server:
+
+```bash
 docker build -t web-server-fiber .
+```
 
-2️⃣ Run the Container
-docker run --name web-server-fiber -p 8080:8080 web-server-fiber
+### 2️⃣ Run the Containers
 
+To start the containers using Docker Compose:
+
+```bash
 docker-compose up -d
-docker logs web-server-fiber
+```
 
-database
+Check the logs to ensure everything is running smoothly:
+
+```bash
+docker logs web-server-fiber
+```
+
+## 🧪 Testing the Database
+
+### Database Container
+
+To run a PostgreSQL container for testing:
+
+```bash
 docker pull postgres
 docker run --name postgres-container -e POSTGRES_PASSWORD=mypassword -p 5432:5432 -d postgres
+```
 
-pgadmin
+### PgAdmin Container
+
+To run PgAdmin for database management:
+
+```bash
 docker pull dpage/pgadmin4
 docker run --name pgadmin-container -p 5050:80 -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSWORD=mypassword -d dpage/pgadmin4
+```
+
+### Web Server Fiber
+
+To run the web server container:
+
+```bash
+docker run --name web-server-fiber -p 8080:8080 web-server-fiber
+```
+
+## 📝 Notes
+
+- Replace `mypassword` and other sensitive details in the `.env` and commands with your actual credentials.
+- The application runs on port `8080` by default, and PgAdmin is accessible on port `5050`.
 
 ## License
 MIT License
