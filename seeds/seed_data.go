@@ -9,7 +9,7 @@ func Seed(db *gorm.DB) {
 	db.Create(&entity.Product{
 		ProductBarcode: "001",
 		ProductName:    "Product - 001",
-		ImagePath:      "uploads/default_image.jpg",
+		ImagePath:      "uploads/default_image.jpeg",
 		Price:          20,
 		Stock: entity.Stock{
 			Quantity: 10,
@@ -18,7 +18,7 @@ func Seed(db *gorm.DB) {
 	db.Create(&entity.Product{
 		ProductBarcode: "002",
 		ProductName:    "Product - 002",
-		ImagePath:      "uploads/default_image.jpg",
+		ImagePath:      "uploads/default_image.jpeg",
 		Price:          30,
 		Stock: entity.Stock{
 			Quantity: 20,

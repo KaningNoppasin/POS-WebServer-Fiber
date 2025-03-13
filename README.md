@@ -147,5 +147,13 @@ docker run --name web-server-fiber -p 8080:8080 web-server-fiber
 docker-compose up -d
 docker logs web-server-fiber
 
+database
+docker pull postgres
+docker run --name postgres-container -e POSTGRES_PASSWORD=mypassword -p 5432:5432 -d postgres
+
+pgadmin
+docker pull dpage/pgadmin4
+docker run --name pgadmin-container -p 5050:80 -e PGADMIN_DEFAULT_EMAIL=user@domain.com -e PGADMIN_DEFAULT_PASSWORD=mypassword -d dpage/pgadmin4
+
 ## License
 MIT License

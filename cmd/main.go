@@ -8,6 +8,7 @@ import (
 	"github.com/KaningNoppasin/Web-Server-Fiber/internal/core/entity"
 	"github.com/KaningNoppasin/Web-Server-Fiber/internal/core/service"
 	"github.com/KaningNoppasin/Web-Server-Fiber/pkg/database"
+	"github.com/KaningNoppasin/Web-Server-Fiber/seeds"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
@@ -19,13 +20,13 @@ func main() {
 
 	dbConn := database.ConnectDB()
 
-	// dbConn.Migrator().DropTable(
-	// 	&entity.Product{},
-	// 	&entity.Stock{},
-	// 	&entity.Customer{},
-	// 	&entity.Bill{},
-	// 	&entity.Bill_Details{},
-	// )
+	dbConn.Migrator().DropTable(
+		&entity.Product{},
+		&entity.Stock{},
+		&entity.Customer{},
+		&entity.Bill{},
+		&entity.Bill_Details{},
+	)
 
 	err := dbConn.AutoMigrate(
 		&entity.Product{},
@@ -38,7 +39,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error during migration: %v", err)
 	}
-	// seeds.Seed(dbConn)
+	seeds.Seed(dbConn)
 
 	app.Use(cors.New())
 	app.Use(logger.New(logger.Config{

@@ -1,51 +1,88 @@
 # version: '3.8'
 
+# services:
+#   # web-server:
+#   #   container_name: web-server-fiber
+#   #   image: web-server-fiber
+#   #   ports:
+#   #     - "8080:8080"
+#   #   env_file:
+#   #     - .env
+#   #   # depends_on:
+#   #   #   - postgres
+#   #   networks:
+#   #     - web-network
+#   #   restart: unless-stopped
+#   postgres:
+#     image: postgres:latest
+#     container_name: postgres
+#     environment:
+#       POSTGRES_DB: mydatabase
+#       POSTGRES_USER: myuser
+#       POSTGRES_PASSWORD: mypassword
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+#     ports:
+#       - "5432:5432"
+#     restart: unless-stopped
+#     networks:
+#       - web-network
+
+#   pgadmin:
+#     image: dpage/pgadmin4:latest
+#     container_name: pgadmin
+#     environment:
+#       PGADMIN_DEFAULT_EMAIL: admin@admin.com
+#       PGADMIN_DEFAULT_PASSWORD: admin
+#     ports:
+#       - "5050:80"
+#     depends_on:
+#       - postgres
+#     restart: unless-stopped
+#     networks:
+#       - web-network
+
+# networks:
+#   web-network:
+#     driver: bridge
+
+# volumes:
+#   postgres_data:
+version: '3.8'
+
 services:
-  # web-server:
-  #   container_name: web-server-fiber
-  #   image: web-server-fiber
-  #   ports:
-  #     - "8080:8080"
-  #   env_file:
-  #     - .env
-  #   # depends_on:
-  #   #   - postgres
-  #   networks:
-  #     - web-network
-  #   restart: unless-stopped
+    postgres:
+        image: postgres:17
+        container_name: postgres-pos-system
+        environment:
+            POSTGRES_DB: database-pos-system
+            POSTGRES_USER: myuser
+            POSTGRES_PASSWORD: mypassword
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        ports:
+            - '5432:5432'
+        restart: unless-stopped
+        networks:
+            - web-network
 
-  postgres:
-    image: postgres:13-alpine
-    container_name: postgres
-    environment:
-      POSTGRES_DB: pos_system
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password1234
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    restart: unless-stopped
-    networks:
-      - web-network
-
-  # pgadmin:
-  #   container_name: pgadmin
-  #   image: dpage/pgadmin4
-  #   environment:
-  #     PGADMIN_DEFAULT_EMAIL: admin@example.com
-  #     PGADMIN_DEFAULT_PASSWORD: admin
-  #   ports:
-  #     - "5050:80"
-  #   depends_on:
-  #     - postgres
-  #   networks:
-  #     - web-network
+    pgadmin:
+        image: dpage/pgadmin4:9.1
+        container_name: pgadmin-pos-system
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@admin.com
+            PGADMIN_DEFAULT_PASSWORD: admin
+        ports:
+            - '5050:80'
+        depends_on:
+            - postgres
+        restart: unless-stopped
+        networks:
+            - web-network
 
 networks:
-  web-network:
-    driver: bridge
+    web-network:
+        driver: bridge
 
 volumes:
-  postgres_data:
-    driver: local
+    postgres_data:
