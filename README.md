@@ -153,7 +153,7 @@ docker run --name postgres-container -e POSTGRES_PASSWORD=mypassword -p 5432:543
 
 pgadmin
 docker pull dpage/pgadmin4
-docker run --name pgadmin-container -p 5050:80 -e PGADMIN_DEFAULT_EMAIL=user@domain.com -e PGADMIN_DEFAULT_PASSWORD=mypassword -d dpage/pgadmin4
+docker run --name pgadmin-container -p 5050:80 -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSWORD=mypassword -d dpage/pgadmin4
 
 ## License
 MIT License
