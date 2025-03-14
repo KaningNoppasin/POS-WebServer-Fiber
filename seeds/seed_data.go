@@ -24,6 +24,24 @@ func Seed(db *gorm.DB) {
 			Quantity: 20,
 		},
 	})
+	db.Create(&entity.Product{
+		ProductBarcode: "003",
+		ProductName:    "Product - 003",
+		ImagePath:      "uploads/Teapot-Multi.webp",
+		Price:          40,
+		Stock: entity.Stock{
+			Quantity: 5,
+		},
+	})
+	db.Create(&entity.Product{
+		ProductBarcode: "004",
+		ProductName:    "Product - 004",
+		ImagePath:      "uploads/Ruby-Red-Wine-Glasses.jpg",
+		Price:          50,
+		Stock: entity.Stock{
+			Quantity: 5,
+		},
+	})
 	db.Create(&entity.Customer{
 		CustomerName: "NN",
 		Phone:        "0800000000",
@@ -50,7 +68,7 @@ func Seed(db *gorm.DB) {
 		BillID:    1,
 		ProductID: 1,
 		Quantity:  3,
-		Total:     10,
+		Total:     30,
 	})
 	db.Create(&entity.Bill_Details{
 		BillID:    1,
@@ -62,12 +80,12 @@ func Seed(db *gorm.DB) {
 		BillID:    2,
 		ProductID: 1,
 		Quantity:  5,
-		Total:     10,
+		Total:     50,
 	})
 	db.Create(&entity.Bill_Details{
 		BillID:    3,
 		ProductID: 2,
 		Quantity:  5,
-		Total:     50,
+		Total:     100,
 	})
 }

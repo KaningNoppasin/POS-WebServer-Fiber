@@ -9,8 +9,8 @@ import (
 
 const UploadDir = "uploads"
 
-// const DefaultImage = "uploads/default_image.jpg"
-var DefaultImage = filepath.Join(UploadDir, "default_image.jpg")
+// const DefaultImage = "uploads/default_image.jpeg"
+var DefaultImage = filepath.Join(UploadDir, "default_image.jpeg")
 
 func SaveImage(c *fiber.Ctx) (string, error) {
 	file, err := c.FormFile("image")

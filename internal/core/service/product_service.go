@@ -70,15 +70,27 @@ func (s *ProductService) UpdateProduct(product *entity.Product) error {
 		return ErrFailedToRetrieveProduct
 	}
 
+	isNewPicture := existingProduct.ImagePath != product.ImagePath
+	isChangeToDefaultImage := isNewPicture && (product.ImagePath == util.DefaultImage)
+
+	// When didn't upload image when update product Just use old image
+	if isChangeToDefaultImage{
+		product.ImagePath = existingProduct.ImagePath
+	}
+
 	err = s.repo.Update(product)
 	if err != nil {
 		// if process fail need to delete image
-		util.DeleteImage(product.ImagePath)
+		if !isChangeToDefaultImage{
+			util.DeleteImage(existingProduct.ImagePath)
+		}
 
 		return ErrFailedToCreateProduct
 	}
 	// if success need to delete old image
-	util.DeleteImage(existingProduct.ImagePath)
+	if !isChangeToDefaultImage{
+		util.DeleteImage(existingProduct.ImagePath)
+	}
 	return nil
 }
 
