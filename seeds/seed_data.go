@@ -44,48 +44,48 @@ func Seed(db *gorm.DB) {
 	})
 	db.Create(&entity.Customer{
 		CustomerName: "NN",
-		Phone:        "0800000000",
+		Phone:        "0812345670",
 		Email:        "nn@test.com",
 	})
 	db.Create(&entity.Customer{
 		CustomerName: "John",
-		Phone:        "0800000000",
+		Phone:        "0987654321",
 		Email:        "john@test.com",
 	})
 	db.Create(&entity.Bill{
 		CustomerID:  1,
-		TotalAmount: 20,
-	})
-	db.Create(&entity.Bill{
-		CustomerID:  2,
-		TotalAmount: 40,
+		TotalAmount: 90,
 	})
 	db.Create(&entity.Bill{
 		CustomerID:  2,
 		TotalAmount: 100,
 	})
+	db.Create(&entity.Bill{
+		CustomerID:  2,
+		TotalAmount: 150,
+	})
 	db.Create(&entity.Bill_Details{
 		BillID:    1,
 		ProductID: 1,
 		Quantity:  3,
-		Total:     30,
+		Total:     60,
 	})
 	db.Create(&entity.Bill_Details{
 		BillID:    1,
 		ProductID: 2,
 		Quantity:  1,
-		Total:     20,
+		Total:     30,
 	})
 	db.Create(&entity.Bill_Details{
 		BillID:    2,
 		ProductID: 1,
 		Quantity:  5,
-		Total:     50,
+		Total:     100,
 	})
 	db.Create(&entity.Bill_Details{
 		BillID:    3,
 		ProductID: 2,
 		Quantity:  5,
-		Total:     100,
+		Total:     150,
 	})
 }
