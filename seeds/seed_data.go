@@ -46,11 +46,13 @@ func Seed(db *gorm.DB) {
 		CustomerName: "NN",
 		Phone:        "0812345670",
 		Email:        "nn@test.com",
+		CardUID:      "8C 9D 84 81",
 	})
 	db.Create(&entity.Customer{
 		CustomerName: "John",
 		Phone:        "0987654321",
 		Email:        "john@test.com",
+		CardUID:      "CB 97 40 E3",
 	})
 	db.Create(&entity.Bill{
 		CustomerID:  1,

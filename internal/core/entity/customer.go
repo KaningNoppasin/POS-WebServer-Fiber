@@ -7,5 +7,6 @@ type Customer struct {
 	CustomerName string `json:"customer_name"`
 	Phone        string `json:"phone"`
 	Email        string `json:"email"`
+	CardUID      string `json:"cardUID"`
 	Bill         []Bill `gorm:"constraint:OnDelete:CASCADE;"`
 }

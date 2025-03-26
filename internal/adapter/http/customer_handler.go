@@ -48,6 +48,7 @@ func (h *CustomerHandler) CreateCustomer(c *fiber.Ctx) error {
 		CustomerName: c.FormValue("customer_name"),
 		Phone:        c.FormValue("phone"),
 		Email:        c.FormValue("email"),
+		CardUID:      c.FormValue("cardUID"),
 	}
 
 	err := h.service.CreateCustomer(&customer)
@@ -70,6 +71,7 @@ func (h *CustomerHandler) UpdateCustomer(c *fiber.Ctx) error {
 		CustomerName: c.FormValue("customer_name"),
 		Phone:        c.FormValue("phone"),
 		Email:        c.FormValue("email"),
+		CardUID:      c.FormValue("cardUID"),
 	}
 	customer.ID = uint(customerId)
 
