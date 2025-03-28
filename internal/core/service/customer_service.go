@@ -35,6 +35,17 @@ func (s *CustomerService) GetCustomerByID(id uint) (*entity.Customer, error) {
 	return customer, nil
 }
 
+func (s *CustomerService) GetCustomerByCardUID(card_uid string) (*entity.Customer, error) {
+	customer, err := s.repo.GetByCardUID(card_uid)
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, ErrCustomerNotFound
+		}
+		return nil, ErrFailedToRetrieveCustomer
+	}
+	return customer, nil
+}
+
 func (s *CustomerService) CreateCustomer(customer *entity.Customer) error {
 	err := s.repo.Create(customer)
 	if err != nil {

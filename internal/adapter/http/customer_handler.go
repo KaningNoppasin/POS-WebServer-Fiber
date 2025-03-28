@@ -43,12 +43,24 @@ func (h *CustomerHandler) GetCustomerByID(c *fiber.Ctx) error {
 	return response.SendSuccessResponse(c, customer)
 }
 
+func (h *CustomerHandler) GetCustomerByCardUID(c *fiber.Ctx) error {
+	cardUID := c.Params("card_uid")
+	customer, err := h.service.GetCustomerByCardUID(cardUID)
+	if err != nil {
+		if errors.Is(err, service.ErrCustomerNotFound) {
+			return response.SendErrorResponse(c, fiber.StatusNotFound, err)
+		}
+		return response.SendErrorResponse(c, fiber.StatusInternalServerError, err)
+	}
+	return response.SendSuccessResponse(c, customer)
+}
+
 func (h *CustomerHandler) CreateCustomer(c *fiber.Ctx) error {
 	customer := entity.Customer{
 		CustomerName: c.FormValue("customer_name"),
 		Phone:        c.FormValue("phone"),
 		Email:        c.FormValue("email"),
-		CardUID:      c.FormValue("cardUID"),
+		CardUID:      c.FormValue("card_uid"),
 	}
 
 	err := h.service.CreateCustomer(&customer)
@@ -71,7 +83,7 @@ func (h *CustomerHandler) UpdateCustomer(c *fiber.Ctx) error {
 		CustomerName: c.FormValue("customer_name"),
 		Phone:        c.FormValue("phone"),
 		Email:        c.FormValue("email"),
-		CardUID:      c.FormValue("cardUID"),
+		CardUID:      c.FormValue("card_uid"),
 	}
 	customer.ID = uint(customerId)
 
