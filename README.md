@@ -109,12 +109,12 @@ Ensure that your Go dependencies are up to date by running the following command
 go mod tidy
 ```
 
-### 2. Set Up Swagger
+<!-- ### 2. Set Up Swagger
 Generate the Swagger documentation for your API with the following command:
 ```bash
 swag init --parseDependency --parseInternal
 swag init
-```
+``` -->
 
 ## Running the Project
 
@@ -199,7 +199,7 @@ To run PgAdmin for database management:
 
 ```bash
 docker pull dpage/pgadmin4
-docker run --name pgadmin-container -p 5050:80 -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSWORD=mypassword -d dpage/pgadmin4
+docker run --name pgadmin-container -p 5050:80 -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSWORD=admin -d dpage/pgadmin4
 ```
 
 ### Web Server Fiber
