@@ -6,7 +6,7 @@ type ProductRepository interface {
 	GetAll() ([]entity.Product, error)
 	GetByID(id uint) (*entity.Product, error)
 	GetByBarcode(barcode string) (*entity.Product, error)
-	Create(product *entity.Product) error
+	Create(product *entity.Product, quantity uint) error
 	Update(product *entity.Product) error
 	Delete(id uint) error
 }

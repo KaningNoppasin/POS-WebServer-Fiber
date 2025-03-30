@@ -49,6 +49,7 @@ func Seed(db *gorm.DB) {
 		Phone:        "0812345670",
 		Email:        "nn@test.com",
 		CardUID:      "91b089b404f42a22c878e405618b9139ab4436bf2dba9b45e8ba2bdb1ef1d9fe",
+		CustomerPoints: 100,
 	})
 	// CB 97 40 E3
 	// ccb05b3531190ad2b7691826f13d2853ce68ab3abc5df07c6ef4d20b2691035c
@@ -57,6 +58,7 @@ func Seed(db *gorm.DB) {
 		Phone:        "0987654321",
 		Email:        "john@test.com",
 		CardUID:      "ccb05b3531190ad2b7691826f13d2853ce68ab3abc5df07c6ef4d20b2691035c",
+		CustomerPoints: 500,
 	})
 	db.Create(&entity.Bill{
 		CustomerID:  1,

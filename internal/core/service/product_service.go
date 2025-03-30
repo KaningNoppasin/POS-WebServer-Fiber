@@ -47,8 +47,8 @@ func (s *ProductService) GetProductByBarcode(barcode string) (*entity.Product, e
 	return product, err
 }
 
-func (s *ProductService) CreateProduct(product *entity.Product) error {
-	err := s.repo.Create(product)
+func (s *ProductService) CreateProduct(product *entity.Product, quantity uint) error {
+	err := s.repo.Create(product, quantity)
 	if err != nil {
 		// if process fail need to delete image
 		util.DeleteImage(product.ImagePath)

@@ -64,6 +64,12 @@ func (h *ProductHandler) CreateProduct(c *fiber.Ctx) error {
 		return response.SendErrorResponse(c, fiber.StatusBadRequest, err)
 	}
 
+	// get product quantity from form data and convert in to integer
+	quantity, err := strconv.ParseUint(c.FormValue("quantity"), 10, 64)
+	if err != nil {
+		return response.SendErrorResponse(c, fiber.StatusBadRequest, err)
+	}
+
 	// Save image to ./upload to folder
 	filePath, _ := util.SaveImage(c)
 
@@ -74,7 +80,7 @@ func (h *ProductHandler) CreateProduct(c *fiber.Ctx) error {
 		Price:          uint(productPrice),
 	}
 
-	err = h.service.CreateProduct(&product)
+	err = h.service.CreateProduct(&product, uint(quantity))
 	if err != nil {
 		return response.SendErrorResponse(c, fiber.StatusInternalServerError, err)
 	}

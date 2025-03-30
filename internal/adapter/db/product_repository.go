@@ -32,7 +32,7 @@ func (r *ProductRepository) GetByBarcode(barcode string) (*entity.Product, error
 	return &product, err
 }
 
-func (r *ProductRepository) Create(product *entity.Product) error {
+func (r *ProductRepository) Create(product *entity.Product, quantity uint) error {
 	err := r.db.Create(product).Error
 	if err != nil {
 		return err
@@ -41,7 +41,7 @@ func (r *ProductRepository) Create(product *entity.Product) error {
 	// Create Stock that Quantity initial 0
 	err = r.db.Create(&entity.Stock{
 		ProductID: product.ID,
-		Quantity:  0,
+		Quantity:  quantity,
 	}).Error
 	return err
 }
