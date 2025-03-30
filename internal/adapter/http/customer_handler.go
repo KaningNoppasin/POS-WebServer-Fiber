@@ -56,14 +56,20 @@ func (h *CustomerHandler) GetCustomerByCardUID(c *fiber.Ctx) error {
 }
 
 func (h *CustomerHandler) CreateCustomer(c *fiber.Ctx) error {
-	customer := entity.Customer{
-		CustomerName: c.FormValue("customer_name"),
-		Phone:        c.FormValue("phone"),
-		Email:        c.FormValue("email"),
-		CardUID:      c.FormValue("card_uid"),
+	customerPoints, err := strconv.ParseUint(c.FormValue("customer_points"), 10, 64)
+	if err != nil {
+		return response.SendErrorResponse(c, fiber.StatusBadRequest, err)
 	}
 
-	err := h.service.CreateCustomer(&customer)
+	customer := entity.Customer{
+		CustomerName:   c.FormValue("customer_name"),
+		Phone:          c.FormValue("phone"),
+		Email:          c.FormValue("email"),
+		CardUID:        c.FormValue("card_uid"),
+		CustomerPoints: uint(customerPoints),
+	}
+
+	err = h.service.CreateCustomer(&customer)
 	if err != nil {
 		return response.SendErrorResponse(c, fiber.StatusInternalServerError, err)
 	}
@@ -79,11 +85,17 @@ func (h *CustomerHandler) UpdateCustomer(c *fiber.Ctx) error {
 		return response.SendErrorResponse(c, fiber.StatusBadRequest, err)
 	}
 
+	customerPoints, err := strconv.ParseUint(c.FormValue("customer_points"), 10, 64)
+	if err != nil {
+		return response.SendErrorResponse(c, fiber.StatusBadRequest, err)
+	}
+
 	customer = entity.Customer{
-		CustomerName: c.FormValue("customer_name"),
-		Phone:        c.FormValue("phone"),
-		Email:        c.FormValue("email"),
-		CardUID:      c.FormValue("card_uid"),
+		CustomerName:   c.FormValue("customer_name"),
+		Phone:          c.FormValue("phone"),
+		Email:          c.FormValue("email"),
+		CardUID:        c.FormValue("card_uid"),
+		CustomerPoints: uint(customerPoints),
 	}
 	customer.ID = uint(customerId)
 
