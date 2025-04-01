@@ -35,12 +35,35 @@ func (s *BillService) GetBillByID(id uint) (*entity.Bill, error) {
 	return bill, nil
 }
 
-func (s *BillService) CreateBill(bill *entity.Bill) error {
-	err := s.repo.Create(bill)
-	if err != nil {
-		return ErrFailedToCreateBill
+func (s *BillService) CreateBill(createBillRequest *entity.CreateBillRequest) error {
+	var total_amount uint
+	for _, req_bill_detail := range createBillRequest.Bill_Details {
+		// get product price from database
+		product_price, err := s.repo.GetProductPriceByID(req_bill_detail.ProductID)
+		if err != nil {
+			return err
+		}
+		total_price := product_price * req_bill_detail.Quantity
+		total_amount += total_price
+
+		// create bill detail
+		bill_detail := entity.Bill_Details{
+			BillID:    req_bill_detail.BillID,
+			ProductID: req_bill_detail.ProductID,
+			Quantity:  req_bill_detail.Quantity,
+			Total:     total_price,
+		}
+		err = s.repo.CreateBillDetail(&bill_detail)
+		if err != nil {
+			return err
+		}
 	}
-	return nil
+	// create bill
+	bill := entity.Bill{
+		CustomerID:  createBillRequest.CustomerID,
+		TotalAmount: total_amount,
+	}
+	return s.repo.Create(&bill)
 }
 
 func (s *BillService) UpdateBill(bill *entity.Bill) error {

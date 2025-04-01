@@ -8,3 +8,8 @@ type Bill struct {
 	TotalAmount  uint           `json:"total_amount"`
 	Bill_Details []Bill_Details `gorm:"constraint:OnDelete:CASCADE;"`
 }
+
+type CreateBillRequest struct {
+	CustomerID   uint           `json:"customer_id"`
+	Bill_Details  []Bill_Details  `json:"bill_details"`
+}

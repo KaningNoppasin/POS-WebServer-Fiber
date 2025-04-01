@@ -26,8 +26,18 @@ func (r *BillRepository) GetByID(id uint) (*entity.Bill, error) {
 	return &bill, err
 }
 
+func (r *BillRepository) GetProductPriceByID(product_id uint) (uint, error) {
+	var product_price uint
+	err := r.db.Model(&entity.Product{}).Select("price").Where("id = ?", product_id).Scan(&product_price).Error
+	return product_price, err
+}
+
 func (r *BillRepository) Create(bill *entity.Bill) error {
 	return r.db.Create(bill).Error
+}
+
+func (r *BillRepository) CreateBillDetail(bill_details *entity.Bill_Details) error {
+	return r.db.Create(bill_details).Error
 }
 
 func (r *BillRepository) Update(bill *entity.Bill) error {
