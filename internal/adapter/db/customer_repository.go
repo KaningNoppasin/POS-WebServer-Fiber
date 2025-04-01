@@ -32,6 +32,12 @@ func (r *CustomerRepository) GetByCardUID(card_uid string) (*entity.Customer, er
 	return &customer, err
 }
 
+func (r *CustomerRepository) GetByPhone(phone string) (*entity.Customer, error) {
+	var customer entity.Customer
+	err := r.db.Preload("Bill").Where("phone = ?", phone).First(&customer).Error
+	return &customer, err
+}
+
 func (r *CustomerRepository) Create(customer *entity.Customer) error {
 	return r.db.Create(customer).Error
 }

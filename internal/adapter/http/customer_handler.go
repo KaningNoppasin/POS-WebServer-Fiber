@@ -55,6 +55,18 @@ func (h *CustomerHandler) GetCustomerByCardUID(c *fiber.Ctx) error {
 	return response.SendSuccessResponse(c, customer)
 }
 
+func (h *CustomerHandler) GetCustomerByPhone(c *fiber.Ctx) error {
+	customerPhone := c.Params("phone")
+	customer, err := h.service.GetCustomerByPhone(customerPhone)
+	if err != nil {
+		if errors.Is(err, service.ErrCustomerNotFound) {
+			return response.SendErrorResponse(c, fiber.StatusNotFound, err)
+		}
+		return response.SendErrorResponse(c, fiber.StatusInternalServerError, err)
+	}
+	return response.SendSuccessResponse(c, customer)
+}
+
 func (h *CustomerHandler) CreateCustomer(c *fiber.Ctx) error {
 	customerPoints, err := strconv.ParseUint(c.FormValue("customer_points"), 10, 64)
 	if err != nil {
