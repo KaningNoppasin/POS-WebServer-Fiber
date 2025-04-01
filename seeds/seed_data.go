@@ -42,22 +42,29 @@ func Seed(db *gorm.DB) {
 			Quantity: 5,
 		},
 	})
+	db.Create(&entity.Customer{
+		CustomerName:   "Guest",
+		Phone:          "0123456789",
+		Email:          "Guest@POS.com",
+		CardUID:        "",
+		CustomerPoints: 0,
+	})
 	// 8C 9D 84 81
 	// 91b089b404f42a22c878e405618b9139ab4436bf2dba9b45e8ba2bdb1ef1d9fe
 	db.Create(&entity.Customer{
-		CustomerName: "NN",
-		Phone:        "0812345670",
-		Email:        "nn@test.com",
-		CardUID:      "91b089b404f42a22c878e405618b9139ab4436bf2dba9b45e8ba2bdb1ef1d9fe",
+		CustomerName:   "NN",
+		Phone:          "0812345670",
+		Email:          "nn@test.com",
+		CardUID:        "7309789b99ae9d9aae3df7f5f443b82c6d0cc072bf5daa340e329f4014d77362",
 		CustomerPoints: 100,
 	})
 	// CB 97 40 E3
 	// ccb05b3531190ad2b7691826f13d2853ce68ab3abc5df07c6ef4d20b2691035c
 	db.Create(&entity.Customer{
-		CustomerName: "John",
-		Phone:        "0987654321",
-		Email:        "john@test.com",
-		CardUID:      "ccb05b3531190ad2b7691826f13d2853ce68ab3abc5df07c6ef4d20b2691035c",
+		CustomerName:   "John",
+		Phone:          "0987654321",
+		Email:          "john@test.com",
+		CardUID:        "61138a7d4e5f4fa506ad78aa77df887b7840d0c93d74c7eef9a00f807c32b676",
 		CustomerPoints: 500,
 	})
 	db.Create(&entity.Bill{
