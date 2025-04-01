@@ -44,22 +44,6 @@ func (h *BillHandler) GetBillByID(c *fiber.Ctx) error {
 }
 
 func (h *BillHandler) CreateBill(c *fiber.Ctx) error {
-	/*
-		{
-			"customer_id": 1,
-			"bill_details": [
-				{
-					"product_id": 1,
-					"quantity": 2
-				},
-				{
-					"product_id": 2,
-					"quantity": 1
-				}
-			]
-		}
-	*/
-
 	var req entity.CreateBillRequest
 	err := c.BodyParser(&req)
 	if err != nil {
@@ -70,36 +54,9 @@ func (h *BillHandler) CreateBill(c *fiber.Ctx) error {
 	if err != nil {
 		return response.SendErrorResponse(c, fiber.StatusInternalServerError, err)
 	}
-
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{
 		"status": "success",
 	})
-
-	// var bill entity.Bill
-	// // get customer id from form data and convert in to integer
-	// customerId, err := strconv.ParseUint(c.FormValue("customer_id"), 10, 64)
-	// if err != nil {
-	// 	return response.SendErrorResponse(c, fiber.StatusBadRequest, err)
-	// }
-
-	// // get totalAmount from form data and convert in to integer
-	// totalAmount, err := strconv.ParseUint(c.FormValue("total_amount"), 10, 64)
-	// if err != nil {
-	// 	return response.SendErrorResponse(c, fiber.StatusBadRequest, err)
-	// }
-
-	// bill = entity.Bill{
-	// 	CustomerID:  uint(customerId),
-	// 	TotalAmount: uint(totalAmount),
-	// }
-
-	// err = h.service.CreateBill(&bill)
-	// if err != nil {
-	// 	return response.SendErrorResponse(c, fiber.StatusInternalServerError, err)
-	// }
-	// return c.Status(fiber.StatusCreated).JSON(fiber.Map{
-	// 	"status": "success",
-	// })
 }
 
 func (h *BillHandler) UpdateBill(c *fiber.Ctx) error {

@@ -37,6 +37,16 @@ func (s *BillService) GetBillByID(id uint) (*entity.Bill, error) {
 
 func (s *BillService) CreateBill(createBillRequest *entity.CreateBillRequest) error {
 	var total_amount uint
+	// create bill init with total amount 0
+	bill := entity.Bill{
+		CustomerID:  createBillRequest.CustomerID,
+		TotalAmount: 0,
+	}
+	err := s.repo.Create(&bill)
+	if err != nil {
+		return err
+	}
+
 	for _, req_bill_detail := range createBillRequest.Bill_Details {
 		// get product price from database
 		product_price, err := s.repo.GetProductPriceByID(req_bill_detail.ProductID)
@@ -48,7 +58,7 @@ func (s *BillService) CreateBill(createBillRequest *entity.CreateBillRequest) er
 
 		// create bill detail
 		bill_detail := entity.Bill_Details{
-			BillID:    req_bill_detail.BillID,
+			BillID:    bill.ID,
 			ProductID: req_bill_detail.ProductID,
 			Quantity:  req_bill_detail.Quantity,
 			Total:     total_price,
@@ -58,12 +68,9 @@ func (s *BillService) CreateBill(createBillRequest *entity.CreateBillRequest) er
 			return err
 		}
 	}
-	// create bill
-	bill := entity.Bill{
-		CustomerID:  createBillRequest.CustomerID,
-		TotalAmount: total_amount,
-	}
-	return s.repo.Create(&bill)
+	// Update bill total amount
+	bill.TotalAmount = total_amount
+	return s.repo.Update(&bill)
 }
 
 func (s *BillService) UpdateBill(bill *entity.Bill) error {
