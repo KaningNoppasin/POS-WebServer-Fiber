@@ -2,6 +2,8 @@ package service
 
 import "errors"
 
+var ErrBadRequest = errors.New("bad request")
+
 var (
 	ErrProductNotFound         = errors.New("product not found")
 	ErrFailedToRetrieveProduct = errors.New("failed to retrieve product")

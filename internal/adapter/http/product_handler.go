@@ -21,6 +21,25 @@ func NewProductHandler(service port.ProductService) *ProductHandler {
 }
 
 func (h *ProductHandler) GetAllProduct(c *fiber.Ctx) error {
+	// api/products?sort=product_name-desc
+	// api/products?sort=product_name-asc
+	params := c.Queries()
+	sort := params["sort"]
+	// for sorting
+	if sort != "" {
+		products, err := h.service.GetAllProductSorted(sort)
+		if err != nil {
+			if errors.Is(err, service.ErrProductNotFound) {
+				return response.SendErrorResponse(c, fiber.StatusNotFound, err)
+			} else if errors.Is(err, service.ErrBadRequest) {
+				return response.SendErrorResponse(c, fiber.StatusBadRequest, err)
+			}
+			return response.SendErrorResponse(c, fiber.StatusInternalServerError, err)
+		}
+		return response.SendSuccessResponse(c, products)
+	}
+
+	// api/products
 	products, err := h.service.GetAllProduct()
 	if err != nil {
 		return response.SendErrorResponse(c, fiber.StatusInternalServerError, err)

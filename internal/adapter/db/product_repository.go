@@ -1,6 +1,8 @@
 package db
 
 import (
+	"strings"
+
 	"github.com/KaningNoppasin/Web-Server-Fiber/internal/core/entity"
 	"github.com/KaningNoppasin/Web-Server-Fiber/internal/core/port"
 	"gorm.io/gorm"
@@ -17,6 +19,14 @@ func NewProductRepository(db *gorm.DB) port.ProductRepository {
 func (r *ProductRepository) GetAll() ([]entity.Product, error) {
 	var products []entity.Product
 	err := r.db.Preload("Stock").Find(&products).Error
+	return products, err
+}
+
+func (r *ProductRepository) GetAllSorted(sort_by string) ([]entity.Product, error) {
+	var products []entity.Product
+	// change product_name-desc to product_name desc
+	sort_by = strings.Replace(sort_by, "-", " ", -1)
+	err := r.db.Preload("Stock").Order(sort_by).Find(&products).Error
 	return products, err
 }
 

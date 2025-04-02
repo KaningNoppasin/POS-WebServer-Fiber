@@ -2,6 +2,7 @@ package service
 
 import (
 	"errors"
+	"strings"
 
 	"github.com/KaningNoppasin/Web-Server-Fiber/internal/core/entity"
 	"github.com/KaningNoppasin/Web-Server-Fiber/internal/core/port"
@@ -20,6 +21,28 @@ func NewProductService(repo port.ProductRepository) port.ProductService {
 func (s *ProductService) GetAllProduct() ([]entity.Product, error) {
 	products, err := s.repo.GetAll()
 	if err != nil {
+		return nil, ErrFailedToRetrieveProduct
+	}
+	return products, nil
+}
+
+func (s *ProductService) GetAllProductSorted(sort_by string) ([]entity.Product, error) {
+	if !strings.Contains(sort_by, "-") {
+		return nil, ErrBadRequest
+	}
+
+	split := strings.Split(sort_by, "-")
+	fieldName := split[0]
+	sortOrder := split[1]
+	if fieldName == "" || sortOrder == "" {
+		return nil, ErrBadRequest
+	}
+
+	products, err := s.repo.GetAllSorted(sort_by)
+	if err != nil {
+		if errors.Is(err, ErrBadRequest) {
+			return nil, ErrBadRequest
+		}
 		return nil, ErrFailedToRetrieveProduct
 	}
 	return products, nil
@@ -74,21 +97,21 @@ func (s *ProductService) UpdateProduct(product *entity.Product) error {
 	isChangeToDefaultImage := isNewPicture && (product.ImagePath == util.DefaultImage)
 
 	// When didn't upload image when update product Just use old image
-	if isChangeToDefaultImage{
+	if isChangeToDefaultImage {
 		product.ImagePath = existingProduct.ImagePath
 	}
 
 	err = s.repo.Update(product)
 	if err != nil {
 		// if process fail need to delete image
-		if !isChangeToDefaultImage{
+		if !isChangeToDefaultImage {
 			util.DeleteImage(existingProduct.ImagePath)
 		}
 
 		return ErrFailedToCreateProduct
 	}
 	// if success need to delete old image
-	if !isChangeToDefaultImage{
+	if !isChangeToDefaultImage {
 		util.DeleteImage(existingProduct.ImagePath)
 	}
 	return nil
