@@ -1,0 +1,19 @@
+meta {
+  name: UpdateCustomerById
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{domain}}/api/customers/1
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  customer_name: edit-by-api
+  phone: 0100000000
+  email: edit@test.com
+  card_uid: 91b089b404f42a22c878e405618b9139ab4436bf2dba9b45e8ba2bdb1ef1d9fe
+  customer_points: 60
+}

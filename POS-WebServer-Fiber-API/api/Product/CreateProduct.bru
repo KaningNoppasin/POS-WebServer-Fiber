@@ -1,0 +1,19 @@
+meta {
+  name: CreateProduct
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{domain}}/api/products
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  product_name: M&M's Peanut Bag - 5.3oz, Chocolates
+  price: 15
+  product_barcode: 040000017320
+  quantity: 1
+  ~image: @file(/Users/nn_mac/Downloads/m&m.webp)
+}

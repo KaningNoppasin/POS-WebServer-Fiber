@@ -1,0 +1,19 @@
+meta {
+  name: CreateCustomer
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{domain}}/api/customers
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  customer_name: create-by-api
+  phone: 0900000000
+  email: create@test.com
+  card_uid: ccb05b3531190ad2b7691826f13d2853ce68ab3abc5df07c6ef4d20b2691035c
+  customer_points: 0
+}

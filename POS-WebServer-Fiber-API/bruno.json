@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Web-Server-Fiber",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

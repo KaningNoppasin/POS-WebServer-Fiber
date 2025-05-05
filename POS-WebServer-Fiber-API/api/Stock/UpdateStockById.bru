@@ -1,0 +1,15 @@
+meta {
+  name: UpdateStockById
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{domain}}/api/stocks/1
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  quantity: 20
+}

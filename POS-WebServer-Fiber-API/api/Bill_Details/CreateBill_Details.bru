@@ -1,0 +1,18 @@
+meta {
+  name: CreateBill_Details
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{domain}}/api/bill_details
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  bill_id: 2
+  product_id: 1
+  quantity: 5
+  total: 10
+}

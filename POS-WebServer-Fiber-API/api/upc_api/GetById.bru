@@ -1,0 +1,15 @@
+meta {
+  name: GetById
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{upc-api}}/prod/trial/lookup?upc=040000017325
+  body: none
+  auth: none
+}
+
+params:query {
+  upc: 040000017325
+}

@@ -1,0 +1,18 @@
+meta {
+  name: UpdateProductById
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{domain}}/api/products/1
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  product_name: M&M's Peanut Bag - 5.3oz, Chocolates
+  price: 15
+  product_barcode: 33
+  ~image: @file(/Users/nn_mac/Downloads/31JVyQ-BRDL._SL160_.jpg)
+}

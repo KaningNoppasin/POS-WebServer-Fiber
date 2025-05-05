@@ -1,0 +1,16 @@
+meta {
+  name: UpdateBillById
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{domain}}/api/bills/4
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  customer_id: 1
+  total_amount: 10
+}

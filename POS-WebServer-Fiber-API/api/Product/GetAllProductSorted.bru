@@ -1,0 +1,15 @@
+meta {
+  name: GetAllProductSorted
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{domain}}/api/products?sort=product_name-asc
+  body: none
+  auth: none
+}
+
+params:query {
+  sort: product_name-asc
+}

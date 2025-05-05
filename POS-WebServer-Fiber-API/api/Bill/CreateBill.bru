@@ -1,0 +1,27 @@
+meta {
+  name: CreateBill
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{domain}}/api/bills
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "customer_id": 1,
+      "bill_details": [
+          {
+              "product_id": 1,
+              "quantity": 10
+          },
+          {
+              "product_id": 2,
+              "quantity": 10
+          }
+      ]
+  }
+}
